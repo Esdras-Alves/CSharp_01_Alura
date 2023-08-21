@@ -6,13 +6,16 @@ using System.Threading;
 
 internal class Program
 {
-    static List<string> listaDasBandas = new List<string>();
+    //static List<string> listaDasBandas = new List<string>();
+
+    static Dictionary<string, List<int>> bandasRegistradas = new Dictionary<string, List<int>>();
 
     private static void Main(string[] args)
     {
         ExibirOpcoesDoMenu();
         //Jogo.Game();
-        //ListaPares();
+        //ListaPares.lista();
+        //ListaCarros.MediaCarros();
     }
     static void ExibirLogo()
     {
@@ -49,7 +52,7 @@ internal class Program
                 MostrarBandasRegistradas();
                 break;
             case 3:
-                Console.WriteLine("Você escolheu a opção " + opcaoEscolhida);
+                AvaliarUmaBanda();
                 break;
             case 4:
                 Console.WriteLine("Você escolheu a opção " + opcaoEscolhida);
@@ -67,12 +70,10 @@ internal class Program
     static void RegistrarBanda()
     {
         Console.Clear();
-        Console.WriteLine("********************");
-        Console.WriteLine("Registro de bandas");
-        Console.WriteLine("********************");
+        ExibirTituloDaOpcao("Registro de Bandas");
         Console.Write("Digite o nome da banda que deseja registrar: ");
         string nomeDaBanda = Console.ReadLine();
-        listaDasBandas.Add(nomeDaBanda);
+        bandasRegistradas.Add(nomeDaBanda, new List<int>());
 
         Console.WriteLine($"\nA banda {nomeDaBanda} foi registrada com sucesso!");
         Thread.Sleep(2000);
@@ -83,16 +84,14 @@ internal class Program
     static void MostrarBandasRegistradas()
     {
         Console.Clear();
-        Console.WriteLine("**************************************");
-        Console.WriteLine("Exibindo todas as bandas registradas");
-        Console.WriteLine("**************************************\n");
+        ExibirTituloDaOpcao("Exibindo todas as bandas registradas");
 
         //for (int i = 0; i<listaDasBandas.Count; i++)
         //{
         //    Console.WriteLine($"Banda: {listaDasBandas[i]}");
         //}
 
-        foreach (string banda in  listaDasBandas)
+        foreach (string banda in bandasRegistradas.Keys)
         {
             Console.WriteLine($"Banda: {banda}");
         }
@@ -102,24 +101,38 @@ internal class Program
         ExibirOpcoesDoMenu();
     }
 
-    static void ListaPares()
+    static void ExibirTituloDaOpcao(string titulo)
     {
-        List<int> numbers = new List<int> {1, 2, 3, 4, 5, 6,7, 8, 9, 10};
+        int quantidadeDeLetras = titulo.Length;
+        string asteriscos = string.Empty.PadLeft(quantidadeDeLetras, '*');
+        Console.WriteLine(asteriscos);
+        Console.WriteLine(titulo);
+        Console.WriteLine(asteriscos + "\n");
+    }
 
-        for(int i = 0; i < numbers.Count; i++)
+    static void AvaliarUmaBanda()
+    {
+        Console.Clear();
+        ExibirTituloDaOpcao("Avaliar banda");
+        Console.Write("Digite o nome da banda que deseja avaliar: ");
+        string nomeDaBanda = Console.ReadLine();
+        if (bandasRegistradas.ContainsKey(nomeDaBanda))
         {
-            if (numbers[i] % 2 == 0)
-            {
-                Console.WriteLine(numbers[i]);
-            }
+           Console.Write($"Qual a nota que a banda {nomeDaBanda} merece: ");
+            int nota = int.Parse(Console.ReadLine());
+            bandasRegistradas[nomeDaBanda].Add(nota);
+            Console.WriteLine($"\nA nota {nota} foi registrada com sucesso para a banda {nomeDaBanda}");
+            Thread.Sleep(5000);
+            Console.Clear();
+            ExibirOpcoesDoMenu();
         }
-
-        foreach (int number in numbers)
+        else
         {
-            if(number % 2 == 0)
-            {
-                Console.WriteLine(number);
-            }
+            Console.WriteLine($"\nA banda {nomeDaBanda} não foi encontrada!");
+            Console.WriteLine("\nDigite uma tecla para voltar ao menu.");
+            Console.ReadKey();
+            Console.Clear();
+            ExibirOpcoesDoMenu();
         }
     }
 }
