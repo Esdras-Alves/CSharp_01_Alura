@@ -2,6 +2,7 @@
 using ConsoleApp1;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 internal class Program
@@ -36,7 +37,7 @@ internal class Program
         Console.WriteLine("Digite 1 para registrar uma banda");
         Console.WriteLine("Digite 2 para mostrar todas as bandas");
         Console.WriteLine("Digite 3 para avaliar uma banda");
-        Console.WriteLine("Digite 3 para exibir a média de uma banda");
+        Console.WriteLine("Digite 4 para exibir a média de uma banda");
         Console.WriteLine("Digite -1 para sair ");
 
         Console.WriteLine("\nDigite a sua opção: ");
@@ -55,7 +56,7 @@ internal class Program
                 AvaliarUmaBanda();
                 break;
             case 4:
-                Console.WriteLine("Você escolheu a opção " + opcaoEscolhida);
+                ExibirMedia();
                 break;
             case -1:
                 Console.WriteLine("Tchau tchau :)");
@@ -121,8 +122,8 @@ internal class Program
            Console.Write($"Qual a nota que a banda {nomeDaBanda} merece: ");
             int nota = int.Parse(Console.ReadLine());
             bandasRegistradas[nomeDaBanda].Add(nota);
-            Console.WriteLine($"\nA nota {nota} foi registrada com sucesso para a banda {nomeDaBanda}");
-            Thread.Sleep(5000);
+            Console.WriteLine($"\nA nota {nota} foi registrada com sucesso para a banda {nomeDaBanda}.");
+            Thread.Sleep(4000);
             Console.Clear();
             ExibirOpcoesDoMenu();
         }
@@ -134,5 +135,30 @@ internal class Program
             Console.Clear();
             ExibirOpcoesDoMenu();
         }
+    }
+
+    static void ExibirMedia()
+    {
+        Console.Clear();
+        ExibirTituloDaOpcao("Média da banda");
+        Console.Write("Digite o nome da banda que deseja exibir a média: ");
+        string nomeDaBanda = Console.ReadLine();
+        if (bandasRegistradas.ContainsKey(nomeDaBanda))
+        {
+            double media = bandasRegistradas[nomeDaBanda].Average();
+            Console.WriteLine($"\nA média da banda {nomeDaBanda} é: {media}");
+            Thread.Sleep(4000);
+            Console.Clear();
+            ExibirOpcoesDoMenu();
+        }
+        else
+        {
+            Console.WriteLine($"\nA banda {nomeDaBanda} não foi encontrada!");
+            Console.WriteLine("\nDigite uma tecla para voltar ao menu.");
+            Console.ReadKey();
+            Console.Clear();
+            ExibirOpcoesDoMenu();
+        }
+
     }
 }
