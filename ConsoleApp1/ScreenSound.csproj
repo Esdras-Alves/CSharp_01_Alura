@@ -43,7 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Menus\Menu.cs" />
+    <Compile Include="Menus\MenuAvaliarBanda.cs" />
+    <Compile Include="Menus\MenuExibirDetalhes.cs" />
+    <Compile Include="Menus\MenuMostrarBandas.cs" />
+    <Compile Include="Menus\MenuRegistrarAlbum.cs" />
+    <Compile Include="Menus\MenuRegistrarBanda.cs" />
+    <Compile Include="Menus\MenuSair.cs" />
     <Compile Include="Modelos\Album.cs" />
+    <Compile Include="Modelos\Avaliacao.cs" />
     <Compile Include="Modelos\Banda.cs" />
     <Compile Include="ListaCarros.cs" />
     <Compile Include="ListaPares.cs" />

@@ -31,5 +31,12 @@ namespace ScreenSound.Modelos
                 Console.WriteLine($"Música: {musica.Nome} ({musica.Duracao})");
             }
         }
+
+        public static int ContadorDeObjetos = 0;
+
+        public Album()
+        {
+            ContadorDeObjetos++;
+        }
     }
 }
