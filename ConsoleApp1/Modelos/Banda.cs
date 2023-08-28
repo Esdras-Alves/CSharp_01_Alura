@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ScreenSound.Modelos
 {
-    internal class Banda
+    internal class Banda : IAvaliavel
     {
         private List<Album> albuns = new List<Album>();
         private List<Avaliacao> notas = new List<Avaliacao>();
+        public IEnumerable<Album> Albuns => albuns;
 
         public string Nome { get; }
         public double Media
@@ -20,7 +21,7 @@ namespace ScreenSound.Modelos
                 else return notas.Average(a => a.Nota);
             }
         }
-        public List<Album> Albuns => albuns;
+        public string Resumo { get; set; }
 
         public Banda(string nome)
         {

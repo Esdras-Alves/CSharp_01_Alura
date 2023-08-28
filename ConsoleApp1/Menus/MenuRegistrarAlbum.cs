@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1.Menus
+namespace ScreenSound.Menus
 {
     internal class MenuRegistrarAlbum : Menu
     {
